@@ -14,6 +14,7 @@ export class ListService implements IListService {
     this.httpClient = new HttpClient(serviceScope);
 
     //It would be nice to use the LogginService here by consuming it from the serviceScope object passed in from the contructor.
+    //It will have to be instantiated by consuming it from the ServiceScope;
 
     serviceScope.whenFinished(() => {
       //It is not possible to consume a dependency by just using the unique name of the ServiceKey.
