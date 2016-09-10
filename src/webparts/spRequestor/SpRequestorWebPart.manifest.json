@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "fc4a442a-51f5-40c7-85e1-7ed9c1cfc7d7",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "fc4a442a-51f5-40c7-85e1-7ed9c1cfc7d7",
+    "group": { "default": "Under Development" },
+    "title": { "default": "SpRequestor" },
+    "description": { "default": "SPRequestor description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "SpRequestor"
+    }
+  }]
+}
