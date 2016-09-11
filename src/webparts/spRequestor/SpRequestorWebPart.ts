@@ -38,7 +38,7 @@ export default class SpRequestorWebPart extends BaseClientSideWebPart<ISpRequest
         </div>
       </div>`;
 
-    //Creating the ServiceScope and registering the mappings
+    //Creating the ServiceScope and registering the service mappings
     const serviceScope: ServiceScope = ServiceScope.startNewRoot();
     const listServiceKey: ServiceKey<IListService> = ServiceKey.create<IListService>("listservicekey", ListService);
     const loggingServiceKey: ServiceKey<ILoggingService> = ServiceKey.create<ILoggingService>("loggingservicekey", LoggingService);
