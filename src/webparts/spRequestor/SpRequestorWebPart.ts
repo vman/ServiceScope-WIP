@@ -9,11 +9,10 @@ import styles from './SpRequestor.module.scss';
 import * as strings from 'spRequestorStrings';
 import { ISpRequestorWebPartProps } from './ISpRequestorWebPartProps';
 
-import { ServiceScope, ServiceKey } from '@microsoft/sp-client-base';
 import { IListService } from './interfaces/IListService';
-import { ListService } from './services/ListService';
 import { ILoggingService } from "./interfaces/ILoggingService";
-import { LoggingService } from "./services/LoggingService";
+
+import { ServiceLocator } from './ServiceLocator';
 
 export default class SpRequestorWebPart extends BaseClientSideWebPart<ISpRequestorWebPartProps> {
 
@@ -38,16 +37,10 @@ export default class SpRequestorWebPart extends BaseClientSideWebPart<ISpRequest
         </div>
       </div>`;
 
-    //Creating the ServiceScope and registering the service mappings
-    const serviceScope: ServiceScope = ServiceScope.startNewRoot();
-    const listServiceKey: ServiceKey<IListService> = ServiceKey.create<IListService>("listservicekey", ListService);
-    const loggingServiceKey: ServiceKey<ILoggingService> = ServiceKey.create<ILoggingService>("loggingservicekey", LoggingService);
-    serviceScope.finish();
+    ServiceLocator.Init();
 
-    //Consuming from the ServiceScope here works fine as the ServiceKeys are readily available.
-    //But it is not so easy from inside one of these classes. Please go to ListService class to see the example.
-    const listServiceInstance: IListService = serviceScope.consume(listServiceKey);
-    const loggingServiceInstance: ILoggingService = serviceScope.consume(loggingServiceKey);
+    const listServiceInstance: IListService = ServiceLocator.getServiceInstance(ServiceLocator.ListServiceKey);
+    const loggingServiceInstance: ILoggingService = ServiceLocator.getServiceInstance(ServiceLocator.LoggingServiceKey);
 
     listServiceInstance.getLists().then((response: JSON) => {
       loggingServiceInstance.log(response);
